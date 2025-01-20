@@ -1,13 +1,17 @@
 package com.example.janghakmoney.common;
 
+import com.example.janghakmoney.scholarship.ScholarshipRegion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
-@Table(name = "regions")
+@Table(name = "regions", uniqueConstraints = @UniqueConstraint(columnNames = {"majorName", "minorName"}))
 public class Region {
 
     @Id

@@ -21,11 +21,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "university_id", nullable = false)
     private University university; // 대학교 정보
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region; // 거주 지역 정보
 
@@ -38,7 +38,7 @@ public class User {
     @Column(nullable = false)
     private Boolean hasFullTuitionScholarship; // 등록금 전액 장학금 수혜 여부
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 15)
     private String phone; // 사용자 전화번호
 
     @CreatedDate

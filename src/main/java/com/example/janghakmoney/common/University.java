@@ -1,8 +1,12 @@
 package com.example.janghakmoney.common;
 
+import com.example.janghakmoney.scholarship.ScholarshipUniversity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter

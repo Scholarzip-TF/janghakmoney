@@ -17,11 +17,11 @@ public class ScholarshipUniversity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // N+1 문제 방지
     @JoinColumn(name = "scholarship_id", nullable = false)
     private Scholarship scholarship;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "university_id", nullable = false)
     private University university;
 
