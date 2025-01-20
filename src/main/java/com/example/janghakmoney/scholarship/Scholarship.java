@@ -26,7 +26,6 @@ public class Scholarship {
     private Integer incomeLevel;
     private LocalDate applicationStartDate;
     private LocalDate applicationEndDate;
-//    private Integer term; // 학기
     private String university;
     private Float grade;
 
