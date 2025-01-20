@@ -33,10 +33,10 @@ public class User {
     private Integer incomeLevel; // 소득 분위 (0~10)
 
     @Column(nullable = false)
-    private Boolean hasLivingExpenseScholarship; // 생활비 장학금 수혜 여부
+    private Boolean hasScholarship; // 생활비 장학금 수혜 여부
 
     @Column(nullable = false)
-    private Boolean hasFullTuitionScholarship; // 등록금 전액 장학금 수혜 여부
+    private Boolean hasFullTuition; // 등록금 전액 장학금 수혜 여부
 
     @Column(nullable = false, length = 15)
     private String phone; // 사용자 전화번호
