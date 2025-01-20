@@ -1,13 +1,17 @@
 package com.example.janghakmoney.common;
 
+import com.example.janghakmoney.scholarship.ScholarshipRegion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
-@Table(name = "regions")
+@Table(name = "regions", uniqueConstraints = @UniqueConstraint(columnNames = {"majorName", "minorName"}))
 public class Region {
 
     @Id
@@ -26,4 +30,9 @@ public class Region {
 
     @Column(nullable = false)
     private Integer level; // 1(대분류), 2(소분류)
+
+    // 장학금-지역조건 연결
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ScholarshipRegion> scholarshipRegions = new ArrayList<>();
+
 }
