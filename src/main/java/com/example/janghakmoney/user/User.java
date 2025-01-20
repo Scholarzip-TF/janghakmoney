@@ -32,19 +32,16 @@ public class User {
     @Column(nullable = false)
     private Integer incomeLevel; // 소득 분위 (0~10)
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Type type; // 지원유형 (ENUM)
+    private Boolean hasLivingExpenseScholarship; // 생활비 장학금 수혜 여부
+
+    @Column(nullable = false)
+    private Boolean hasFullTuitionScholarship; // 등록금 전액 장학금 수혜 여부
+
+    @Column(nullable = false)
+    private String phone; // 사용자 전화번호
 
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt; // 생성일
-
-    // 지원유형 ENUM 정의
-    public enum Type {
-        TUITION,                // 등록금
-        LIVING_DUPLICATE,       // 생활비 - 타 장학 중복 O
-        LIVING_NO_DUPLICATE,    // 생활비 - 타 장학 중복 X
-        INTEREST_SUPPORT        // 이자지원
-    }
 }

@@ -11,28 +11,14 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@Table(name = "Scholarship")
+@Table(name = "scholarships")
 public class Scholarship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "university_id", nullable = true)
-    private University university; // 조건: 특정 대학교
-
-    @ManyToOne
-    @JoinColumn(name = "region_id", nullable = true)
-    private Region region; // 조건: 특정 지역
-
-    @Column(nullable = false)
-    private Integer incomeLevel; // 조건: 소득 분위
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Type type; // 조건: 지원 유형 (ENUM)
-
+    // 정보 6개
     @Column(nullable = false)
     private String name; // 장학금명
 
@@ -42,17 +28,29 @@ public class Scholarship {
     @Column(nullable = false)
     private String description; // 지원 내용
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate applicationStartDate; // 모집 시작일
 
     @Column(nullable = false)
     private LocalDate applicationEndDate; // 모집 종료일
 
-    // 지원유형 ENUM 정의
-    public enum Type {
-        TUITION,                // 등록금
-        LIVING_DUPLICATE,       // 생활비 - 타 장학 중복 O
-        LIVING_NO_DUPLICATE,    // 생활비 - 타 장학 중복 X
-        INTEREST_SUPPORT        // 이자지원
-    }
+    @Column(nullable = true)
+    private String note; // 비고
+
+    // 비교 조건 4개
+    // 조건: 특정 대학교 (장학금-대학조건 연결)
+    @OneToMany(mappedBy = "scholarship", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ScholarshipUniversity> scholarshipUniversities = new ArrayList<>();
+
+    // 조건: 특정 지역 (장학금-지역 연결)
+    @OneToMany(mappedBy = "scholarship", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ScholarshipRegion> scholarshipRegions = new ArrayList<>();
+
+    @Column(nullable = false)
+    private Integer incomeLevel; // 조건: 소득 분위
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ScholarshipType type; // 조건: 지원 유형 (ENUM)
+
 }

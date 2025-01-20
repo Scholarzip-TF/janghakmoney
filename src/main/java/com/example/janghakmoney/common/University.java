@@ -16,4 +16,9 @@ public class University {
 
     @Column(nullable = false, unique = true)
     private String name; // 대학교 이름
+
+    // 장학금-대학조건 연결
+    @OneToMany(mappedBy = "university", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ScholarshipUniversity> scholarshipUniversities = new ArrayList<>();
+
 }

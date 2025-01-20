@@ -18,7 +18,7 @@ class ScholarshipRepositoryTest {
         Scholarship scholarship = new Scholarship();
         scholarship.setName("테스트 장학금");
         scholarship.setIncomeLevel(3);
-        scholarship.setType(Scholarship.Type.TUITION);
+        scholarship.setType(ScholarshipType.TUITION);
         scholarshipRepository.save(scholarship);
 
         // When
