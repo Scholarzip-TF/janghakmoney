@@ -23,6 +23,7 @@ public class User {
     private Integer incomeLevel;
     private Float grade;
     private Boolean hasScholarship;
+
     private String phone;
     private String email;
 
