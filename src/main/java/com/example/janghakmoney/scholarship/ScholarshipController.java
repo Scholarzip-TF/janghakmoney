@@ -1,6 +1,9 @@
 package com.example.janghakmoney.scholarship;
 
+import com.example.janghakmoney.common.Region;
+import com.example.janghakmoney.common.University;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -8,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/scholarships")
@@ -17,7 +21,7 @@ public class ScholarshipController {
 
     private final ScholarshipService scholarshipService;
 
-    @PostMapping("/possible") // 해당하는 장학금을 전부 보여줌
+    @PostMapping("/possible")
     public ResponseEntity<List<Scholarship>> searchPossibleScholarships(
             @RequestBody ScholarshipSearchCondition condition
     ) {
@@ -25,24 +29,21 @@ public class ScholarshipController {
                 condition.getIncomeLevel(),
                 condition.getTargetRegion(),
                 condition.getUniversity(),
-                condition.getGrade(),
-                condition.getHasScholarship()
+                condition.getType()
         ));
     }
 
-    // 검색 조건을 위한 클래스
-    @Getter
-    @Setter
-    public static class ScholarshipSearchCondition {
-        private Integer incomeLevel;
-        private String targetRegion;
-        private String university;
-        private Float grade;
-        private Boolean hasScholarship;
+    @GetMapping("/{id}")
+    public ResponseEntity<Scholarship> getScholarshipDetail(@PathVariable(name = "id") UUID id) {
+        return ResponseEntity.ok(scholarshipService.findScholarshipDetail(id));
     }
 
-    @GetMapping("/{id}") // user가 선택한 장학금 디테일을 보여줌
-    public ResponseEntity<Scholarship> getScholarshipDetail(@PathVariable(name = "id") Long id) {
-        return ResponseEntity.ok(scholarshipService.findScholarshipDetail(id));
+    @Data
+    public static class ScholarshipSearchCondition {
+        private Integer incomeLevel;           // 소득분위
+        private Region targetRegion;           // 지역
+        private University university;             // 대학교
+        private ScholarshipType type;          // 장학금 유형
+
     }
 }

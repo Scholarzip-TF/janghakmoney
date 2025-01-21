@@ -1,7 +1,5 @@
 package com.example.janghakmoney.scholarship;
 
-import com.example.janghakmoney.common.Region;
-import com.example.janghakmoney.common.University;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,33 +7,51 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "scholarships")
+@Table(name = "Scholarship")
 public class Scholarship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     // 정보 6개
     @Column(nullable = false)
     private String name; // 장학금명
-
-    @ManyToOne
-    @JoinColumn(name = "university_id", nullable = true)
-    private University university; // 조건: 특정 대학교
-
-    @ManyToOne
-    @JoinColumn(name = "region_id", nullable = true)
-    private Region region; // 조건: 특정 지역
 
     @Column(nullable = false)
     private String organization; // 장학 재단명
 
     @Column(nullable = false)
     private String description; // 지원 내용
+
+    @Column(nullable = true)
+    private LocalDate applicationStartDate; // 모집 시작일
+
+    @Column(nullable = false)
+    private LocalDate applicationEndDate; // 모집 종료일
+
+    @Column(nullable = true)
+    private String note; // 비고
+
+    // 비교 조건 4개
+    // 조건: 특정 대학교 (장학금-대학조건 연결)
+    @OneToMany(mappedBy = "scholarship", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ScholarshipUniversity> scholarshipUniversities = new ArrayList<>();
+
+    // 조건: 특정 지역 (장학금-지역 연결)
+    @OneToMany(mappedBy = "scholarship", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ScholarshipRegion> scholarshipRegions = new ArrayList<>();
+
+    @Column(nullable = false)
+    private Integer incomeLevel; // 조건: 소득 분위
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ScholarshipType type; // 조건: 지원 유형 (ENUM)
 
 }
