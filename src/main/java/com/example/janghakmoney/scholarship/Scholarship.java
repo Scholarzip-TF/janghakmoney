@@ -41,9 +41,11 @@ public class Scholarship {
     // 비교 조건 4개
     // 조건: 특정 대학교 (장학금-대학조건 연결)
     @OneToMany(mappedBy = "scholarship", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Column(nullable = true)
     private List<ScholarshipUniversity> scholarshipUniversities = new ArrayList<>();
 
     // 조건: 특정 지역 (장학금-지역 연결)
+    @Column(nullable = true)
     @OneToMany(mappedBy = "scholarship", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ScholarshipRegion> scholarshipRegions = new ArrayList<>();
 
