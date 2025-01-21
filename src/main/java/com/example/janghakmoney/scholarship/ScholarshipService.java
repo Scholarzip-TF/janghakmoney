@@ -1,9 +1,13 @@
 package com.example.janghakmoney.scholarship;
 
+import com.example.janghakmoney.common.Region;
+import com.example.janghakmoney.common.University;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -14,24 +18,21 @@ public class ScholarshipService {
 
     public List<Scholarship> findPossibleScholarships(
             Integer incomeLevel,
-            String targetRegion,
-            String university,
-            Float grade,
-            Boolean hasScholarship
+            Region targetRegion,
+            University university,
+            ScholarshipType type
     ) {
         return scholarshipRepository.findPossibleScholarships(
                 incomeLevel,
                 targetRegion,
                 university,
-                grade,
-                hasScholarship
+                type
         );
     }
 
-    public Scholarship findScholarshipDetail(Long scholarshipId) {
+    public Scholarship findScholarshipDetail(UUID scholarshipId) {
         return scholarshipRepository.findById(scholarshipId)
-                .orElseThrow(() -> new IllegalStateException("해당 장학금을 찾을 수 없습니다. ID: " + scholarshipId));
+                .orElseThrow(() -> new EntityNotFoundException("해당 장학금을 찾을 수 없습니다. ID: " + scholarshipId));
     }
-
 }
 

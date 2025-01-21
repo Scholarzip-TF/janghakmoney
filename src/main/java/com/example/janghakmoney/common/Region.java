@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "regions", uniqueConstraints = @UniqueConstraint(columnNames = {"majorName", "minorName"}))
+@Table(name = "Region", uniqueConstraints = @UniqueConstraint(columnNames = {"majorName", "minorName"}))
 public class Region {
 
     @Id

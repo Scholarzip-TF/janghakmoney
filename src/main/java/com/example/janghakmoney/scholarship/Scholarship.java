@@ -1,7 +1,5 @@
 package com.example.janghakmoney.scholarship;
 
-import com.example.janghakmoney.common.Region;
-import com.example.janghakmoney.common.University;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,16 +7,17 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "scholarships")
+@Table(name = "Scholarship")
 public class Scholarship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     // 정보 6개
     @Column(nullable = false)
