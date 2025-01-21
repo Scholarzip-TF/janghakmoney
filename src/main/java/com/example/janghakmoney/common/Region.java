@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,7 +17,7 @@ public class Region {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID) // UUID로 고유 ID 생성
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private String majorName; // 대분류 (예: 서울특별시)
