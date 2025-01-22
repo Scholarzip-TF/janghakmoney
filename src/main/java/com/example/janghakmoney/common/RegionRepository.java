@@ -25,7 +25,7 @@ public interface RegionRepository extends JpaRepository<Region, UUID> {
     @Query("SELECT r FROM Region r " +
             "WHERE (:majorName IS NULL OR r.majorName = :majorName) " +
             "AND (:minorName IS NULL OR r.minorName = :minorName)")
-    Region findByMajorNameAndMinorName(
+    Optional<Region> findByMajorNameAndMinorName(
             @Param("majorName") String majorName,
             @Param("minorName") String minorName
     );
