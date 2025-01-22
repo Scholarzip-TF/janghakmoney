@@ -26,7 +26,7 @@ public class Region {
     private String minorName; // 소분류 (예: 강남구)
 
     @ManyToOne
-    @JoinColumn(name = "parent_id", nullable = true) // 대분류와의 참조 관계
+    @JoinColumn(name = "parent_region", nullable = true) // 대분류와의 참조 관계
     private Region parent; // 상위 주소 (대분류)
 
     @Column(nullable = false)

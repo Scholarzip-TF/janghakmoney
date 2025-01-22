@@ -59,8 +59,8 @@ public class UserService {
         user.setUniversity(university);
         user.setRegion(region);
         user.setIncomeLevel(request.getIncomeLevel());
-        user.setHasLivingExpenseScholarship(request.getHasLivingExpenseScholarship());
-        user.setHasFullTuitionScholarship(request.getHasFullTuitionScholarship());
+        user.setHasScholarship(request.getHasLivingExpenseScholarship());
+        user.setHasFullTuition(request.getHasFullTuitionScholarship());
 
         return userRepository.save(user);
     }
