@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -17,7 +16,7 @@ public class Scholarship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private Integer id;
 
     // 정보 6개
     @Column(nullable = false)
