@@ -54,6 +54,12 @@ public class Scholarship {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ScholarshipType type; // 조건: 지원 유형 (ENUM)
+    private ScholarshipType type;
+
+    // 조건: 지원 유형 (ENUM)
+    // TUITION,                    // 등록금
+    //    LIVING_DUPLICATE,           // 생활비 - 타 장학 중복 가능
+    //    LIVING_NO_DUPLICATE,        // 생활비 - 타 장학 중복 불가
+    //    INTEREST                   // 이자 지원
 
 }

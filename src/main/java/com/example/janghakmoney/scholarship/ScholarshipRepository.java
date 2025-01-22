@@ -1,5 +1,8 @@
 package com.example.janghakmoney.scholarship;
 
+import com.example.janghakmoney.common.Region;
+import com.example.janghakmoney.common.University;
+import lombok.Getter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

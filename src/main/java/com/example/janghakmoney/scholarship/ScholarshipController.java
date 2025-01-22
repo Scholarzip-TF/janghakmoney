@@ -1,8 +1,12 @@
 package com.example.janghakmoney.scholarship;
 
+import com.example.janghakmoney.common.Region;
+import com.example.janghakmoney.common.University;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +21,7 @@ public class ScholarshipController {
 
     private final ScholarshipService scholarshipService;
 
-    @PostMapping("/possible")
+    @PostMapping("/possible") // 지원 가능한 장학금 정보를 전부 보여줌
     public ResponseEntity<List<Scholarship>> searchPossibleScholarships(
             @RequestBody ScholarshipSearchCondition condition
     ) {
@@ -33,12 +37,13 @@ public class ScholarshipController {
         ));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // 유저가 선택한 장학금 디테일을 보여줌
     public ResponseEntity<Scholarship> getScholarshipDetail(@PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok(scholarshipService.findScholarshipDetail(id));
     }
 
-    @Data
+    @Getter
+    @Setter
     public static class ScholarshipSearchCondition {
         private Integer incomeLevel;           // 소득분위
 //        private Region targetRegion;      // 지역 // RegionId로 수정 희망
