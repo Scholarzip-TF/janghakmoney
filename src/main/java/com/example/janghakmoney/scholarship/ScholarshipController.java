@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/scholarships")
@@ -25,8 +26,8 @@ public class ScholarshipController {
     ) {
         return ResponseEntity.ok(scholarshipService.findPossibleScholarships(
                 condition.getIncomeLevel(),
-                condition.getRegion(),
-                condition.getUniversity(),
+                condition.getRegionId(),
+                condition.getUniversityId(),
                 condition.getHasFullTuition(),
                 condition.getHasScholarship()
         ));
@@ -39,13 +40,14 @@ public class ScholarshipController {
 
     @Getter
     @Setter
-    public static class ScholarshipSearchCondition {
+    public static class ScholarshipSearchCondition { // 유저가 post 요청 보내는 dto
         private Integer incomeLevel;           // 소득분위
-        private Region region;      // 지역 // RegionId로 수정 희망
-        private University university;   // 대학교 // univId로 수정 희망
+        private UUID regionId;      // 지역id
+        private UUID universityId;   // 대학교id
         private ScholarshipType type;   // 장학금 유형
         private Boolean hasFullTuition; // 등록금 지원 여부
         private Boolean hasScholarship; // 기존 장학금 수혜 여부
+        private String phoneNumber; // user 입력값, 매칭 로직에는 미포함
 
     }
 }

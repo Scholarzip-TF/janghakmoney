@@ -18,14 +18,14 @@ public class ScholarshipService {
 
     public List<Scholarship> findPossibleScholarships(
             Integer incomeLevel,
-            Region region,
-            University university,
+            UUID regionId,
+            UUID universityId,
             Boolean hasFullTuition,
             Boolean hasScholarship
     ) {
     return scholarshipRepository.findPossibleScholarships(
-                    region,
-                    university,
+                    regionId,
+                    universityId,
                     incomeLevel,
                     hasFullTuition,
                     hasScholarship
