@@ -18,7 +18,13 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, UUID> 
             "WHERE (:incomeLevel IS NULL OR s.incomeLevel >= :incomeLevel) " +
             "AND (:targetRegion IS NULL OR EXISTS (SELECT sr FROM s.scholarshipRegions sr WHERE sr.region = :targetRegion)) " +
             "AND (:university IS NULL OR EXISTS (SELECT su FROM s.scholarshipUniversities su WHERE su.university = :university)) " +
-            "AND (:type IS NULL OR s.type = :type)")
+            "AND (:type IS NULL OR s.type = :type) " +
+            "AND (:hasFullTuition IS NULL OR " +
+            "(s.type = 'TUITION' AND :hasFullTuition = false) OR " +
+            "(s.type != 'TUITION')) " +
+            "AND (:hasScholarship IS NULL OR " +
+            "(s.type = 'LIVING_NO_DUPLICATE' AND :hasScholarship = false) OR " +
+            "(s.type != 'LIVING_NO_DUPLICATE'))")
 
     List<Scholarship> findPossibleScholarships(
             @Param("incomeLevel") Integer incomeLevel,

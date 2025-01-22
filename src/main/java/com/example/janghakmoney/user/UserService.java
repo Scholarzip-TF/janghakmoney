@@ -1,24 +1,67 @@
 package com.example.janghakmoney.user;
 
+import com.example.janghakmoney.common.Region;
+import com.example.janghakmoney.common.RegionRepository;
+import com.example.janghakmoney.common.University;
+import com.example.janghakmoney.common.UniversityRepository;
+import com.example.janghakmoney.user.dto.UserCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UniversityRepository universityRepository;
+    private final RegionRepository regionRepository;
 
-    @Transactional
-    public User processUserInfo(User user) {
-        // 이메일 or 전화번호로만 기존 사용자 확인
-        return userRepository.findByPhone(user.getPhone())
-                // 기존 사용자면 DB 저장 없이 입력받은 검색 정보 그대로 반환
-                .orElseGet(() ->
-                        // 새로운 사용자만 DB에 저장
-                        userRepository.save(user)
-                );
+    public User createUser(UserCreateRequest request) {
+        // 대학교 조회 또는 생성
+        University university = universityRepository.findByName(request.getUniversityName())
+                .orElseGet(() -> {
+                    University newUniversity = new University();
+                    newUniversity.setName(request.getUniversityName());
+                    return universityRepository.save(newUniversity);
+                });
+
+        // 지역 조회 또는 생성
+        Region region = regionRepository.findByMajorNameAndMinorName(
+                        request.getMajorRegionName(),
+                        request.getMinorRegionName()
+                )
+                .orElseGet(() -> {
+                    Region newRegion = new Region();
+                    newRegion.setMajorName(request.getMajorRegionName());
+                    newRegion.setMinorName(request.getMinorRegionName());
+
+                    // 부모 지역 설정 로직
+                    if (request.getMinorRegionName() != null) {
+                        Region parentRegion = regionRepository.findByMajorName(request.getMajorRegionName())
+                                .orElseGet(() -> {
+                                    Region newParentRegion = new Region();
+                                    newParentRegion.setMajorName(request.getMajorRegionName());
+                                    newParentRegion.setLevel(1);
+                                    return regionRepository.save(newParentRegion);
+                                });
+                        newRegion.setParent(parentRegion);
+                        newRegion.setLevel(2);
+                    } else {
+                        newRegion.setLevel(1);
+                    }
+
+                    return regionRepository.save(newRegion);
+                });
+
+        // 사용자 엔티티 생성
+        User user = new User();
+        user.setPhone(request.getPhone());
+        user.setUniversity(university);
+        user.setRegion(region);
+        user.setIncomeLevel(request.getIncomeLevel());
+        user.setHasLivingExpenseScholarship(request.getHasLivingExpenseScholarship());
+        user.setHasFullTuitionScholarship(request.getHasFullTuitionScholarship());
+
+        return userRepository.save(user);
     }
 }

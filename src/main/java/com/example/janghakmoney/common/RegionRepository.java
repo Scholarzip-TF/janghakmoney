@@ -14,15 +14,6 @@ public interface RegionRepository extends JpaRepository<Region, UUID> {
     // 주요 이름으로 Region 조회
     Optional<Region> findByMajorName(String majorName);
 
-    // 부모 지역 ID로 하위 지역들 조회
-    List<Region> findByParent(Region parentRegion);
-
-    // 지역 레벨로 Region 조회
-    List<Region> findByLevel(int level);
-
-    // 주요 이름과 부모 ID로 특정 지역 조회
-    Optional<Region> findByMajorNameAndParentId(String majorName, UUID parentId);
-
     // 특정 레벨의 고유한 지역명들 조회
     @Query("SELECT DISTINCT r.majorName FROM Region r WHERE r.level = :level")
     List<String> findDistinctMajorNamesByLevel(@Param("level") int level);
@@ -30,4 +21,12 @@ public interface RegionRepository extends JpaRepository<Region, UUID> {
     // 추가로 편의 메서드 제공
     @Query("SELECT r FROM Region r WHERE r.parent.id = :parentId")
     List<Region> findChildRegions(@Param("parentId") UUID parentId);
+
+    @Query("SELECT r FROM Region r " +
+            "WHERE (:majorName IS NULL OR r.majorName = :majorName) " +
+            "AND (:minorName IS NULL OR r.minorName = :minorName)")
+    Region findByMajorNameAndMinorName(
+            @Param("majorName") String majorName,
+            @Param("minorName") String minorName
+    );
 }

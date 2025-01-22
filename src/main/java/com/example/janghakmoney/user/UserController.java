@@ -1,5 +1,6 @@
 package com.example.janghakmoney.user;
 
+import com.example.janghakmoney.user.dto.UserCreateRequest;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> processUserInfo(@RequestBody User user) {
-        return ResponseEntity.ok(userService.processUserInfo(user));
+    public ResponseEntity<User> createUser(@RequestBody UserCreateRequest request) {
+        User createdUser = userService.createUser(request);
+        return ResponseEntity.ok(createdUser);
     }
 }

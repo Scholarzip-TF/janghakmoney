@@ -21,7 +21,7 @@ public class ScholarshipController {
 
     private final ScholarshipService scholarshipService;
 
-    @PostMapping("/possible")
+    @PostMapping("/possible") // 지원 가능한 장학금 정보를 전부 보여줌
     public ResponseEntity<List<Scholarship>> searchPossibleScholarships(
             @RequestBody ScholarshipSearchCondition condition
     ) {
@@ -35,19 +35,21 @@ public class ScholarshipController {
         ));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // 유저가 선택한 장학금 디테일을 보여줌
     public ResponseEntity<Scholarship> getScholarshipDetail(@PathVariable(name = "id") UUID id) {
         return ResponseEntity.ok(scholarshipService.findScholarshipDetail(id));
     }
 
-    @Data
+    @Getter
+    @Setter
     public static class ScholarshipSearchCondition {
-        private Integer incomeLevel;           // 소득분위
+
+        private Integer incomeLevel;      // 소득분위
         private Region targetRegion;      // 지역
-        private University university;   // 대학교
-        private ScholarshipType type;   // 장학금 유형
-        private Boolean hasFullTuition; // 등록금 지원 여부
-        private Boolean hasScholarship; // 기존 장학금 수혜 여부
+        private University university;    // 대학교
+        private ScholarshipType type;    // 장학금 유형
+        private Boolean hasFullTuition;  // 등록금 지원 여부
+        private Boolean hasScholarship;  // 기존 장학금 수혜 여부
 
     }
 }
