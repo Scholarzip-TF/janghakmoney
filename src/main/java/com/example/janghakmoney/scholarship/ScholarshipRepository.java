@@ -2,13 +2,16 @@ package com.example.janghakmoney.scholarship;
 
 import com.example.janghakmoney.common.Region;
 import com.example.janghakmoney.common.University;
+import lombok.Getter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public interface ScholarshipRepository extends JpaRepository<Scholarship, UUID> {
 
     @Query("SELECT s FROM Scholarship s " +
@@ -21,7 +24,9 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, UUID> 
             @Param("incomeLevel") Integer incomeLevel,
             @Param("targetRegion") Region targetRegion,
             @Param("university") University university,
-            @Param("type") ScholarshipType type
+            @Param("type") ScholarshipType type,
+            @Param("hasFullTuition") Boolean hasFullTuition,
+            @Param("hasScholarship") Boolean hasScholarship
     );
 
 }

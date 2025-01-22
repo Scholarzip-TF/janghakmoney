@@ -29,7 +29,9 @@ public class ScholarshipController {
                 condition.getIncomeLevel(),
                 condition.getTargetRegion(),
                 condition.getUniversity(),
-                condition.getType()
+                condition.getType(),
+                condition.getHasFullTuition(),
+                condition.getHasScholarship()
         ));
     }
 
@@ -41,9 +43,11 @@ public class ScholarshipController {
     @Data
     public static class ScholarshipSearchCondition {
         private Integer incomeLevel;           // 소득분위
-        private Region targetRegion;           // 지역
-        private University university;             // 대학교
-        private ScholarshipType type;          // 장학금 유형
+        private Region targetRegion;      // 지역
+        private University university;   // 대학교
+        private ScholarshipType type;   // 장학금 유형
+        private Boolean hasFullTuition; // 등록금 지원 여부
+        private Boolean hasScholarship; // 기존 장학금 수혜 여부
 
     }
 }
