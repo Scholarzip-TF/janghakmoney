@@ -24,12 +24,12 @@ public class ScholarshipService {
             Boolean hasFullTuition,
             Boolean hasScholarship
     ) {
-return scholarshipRepository.findPossibleScholarships(
-                regionId,
-                universityId,
-                incomeLevel,
-                hasFullTuition,
-                hasScholarship
+    return scholarshipRepository.findPossibleScholarships(
+                    regionId,
+                    universityId,
+                    incomeLevel,
+                    hasFullTuition,
+                    hasScholarship
         );
     }
 

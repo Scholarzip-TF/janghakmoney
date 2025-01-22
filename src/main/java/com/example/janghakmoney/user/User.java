@@ -23,11 +23,11 @@ public class User {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "university_id", nullable = false)
+    @JoinColumn(name = "university", nullable = false)
     private University university; // 대학교 정보
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id", nullable = false)
+    @JoinColumn(name = "region", nullable = false)
     private Region region; // 거주 지역 정보
 
     @Column(nullable = false)
