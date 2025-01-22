@@ -21,8 +21,8 @@ public class ScholarshipService {
             Region targetRegion,
             University university,
             ScholarshipType type,
-            Boolean hasScholarship,
-            Boolean hasFullTuition
+            Boolean hasFullTuition,
+            Boolean hasScholarship
     ) {
         return scholarshipRepository.findPossibleScholarships(
                 incomeLevel,
