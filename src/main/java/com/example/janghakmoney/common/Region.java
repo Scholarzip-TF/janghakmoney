@@ -19,7 +19,7 @@ public class Region {
     @GeneratedValue(strategy = GenerationType.UUID) // UUID로 고유 ID 생성
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String majorName; // 대분류 (예: 서울특별시)
 
     @Column(nullable = true)

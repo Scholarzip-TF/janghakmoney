@@ -6,23 +6,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "scholarship_university")
+@IdClass(ScholarshipUniversityId.class) // 복합키 클래스 연결
 public class ScholarshipUniversity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // N+1 문제 방지
+    @ManyToOne(fetch = FetchType.LAZY) // N+1 문제 방지
     @JoinColumn(name = "scholarship_id", nullable = false)
     private Scholarship scholarship;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "university_id", nullable = false)
     private University university;
 

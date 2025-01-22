@@ -37,14 +37,14 @@ class ScholarshipDataInitTest {
         scholarshipRepository.deleteAll();
         scholarshipRepository.flush();
 
+        userRepository.deleteAll();
+        userRepository.flush();
+
         universityRepository.deleteAll();
         universityRepository.flush();
 
         regionRepository.deleteAll();
         regionRepository.flush();
-
-        userRepository.deleteAll();
-        userRepository.flush();
 
         // 1. Region 데이터 생성
         Region seoul = new Region();

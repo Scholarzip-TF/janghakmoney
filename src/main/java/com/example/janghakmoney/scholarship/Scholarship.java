@@ -16,7 +16,7 @@ public class Scholarship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     // 정보 6개
     @Column(nullable = false)

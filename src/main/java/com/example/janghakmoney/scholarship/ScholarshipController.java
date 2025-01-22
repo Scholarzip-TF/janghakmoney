@@ -2,7 +2,12 @@ package com.example.janghakmoney.scholarship;
 
 import com.example.janghakmoney.common.Region;
 import com.example.janghakmoney.common.University;
+import com.example.janghakmoney.scholarship.dto.ScholarshipDetailResponse;
+import com.example.janghakmoney.scholarship.dto.ScholarshipListResponse;
+import com.example.janghakmoney.scholarship.dto.ScholarshipSearchRequest;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/scholarships")
@@ -20,34 +26,27 @@ public class ScholarshipController {
 
     private final ScholarshipService scholarshipService;
 
-    @PostMapping("/possible") // 지원 가능한 장학금 정보를 전부 보여줌
-    public ResponseEntity<List<Scholarship>> searchPossibleScholarships(
-            @RequestBody ScholarshipSearchCondition condition
+    @PostMapping("/possible")
+    @Operation(summary = "가능한 장학금 검색", description = "지원 가능한 장학금 목록을 조회합니다.")
+    public ResponseEntity<List<ScholarshipListResponse>> searchPossibleScholarships(
+            @Valid @RequestBody ScholarshipSearchRequest condition
     ) {
-        return ResponseEntity.ok(scholarshipService.findPossibleScholarships(
+        List<Scholarship> scholarships = scholarshipService.findPossibleScholarships(
                 condition.getIncomeLevel(),
                 condition.getRegionId(),
                 condition.getUniversityId(),
                 condition.getHasFullTuition(),
                 condition.getHasScholarship()
-        ));
+        );
+        return ResponseEntity.ok(scholarships.stream()
+                .map(ScholarshipListResponse::new)
+                .collect(Collectors.toList()));
     }
 
-    @GetMapping("/{id}") // 유저가 선택한 장학금 디테일을 보여줌
-    public ResponseEntity<Scholarship> getScholarshipDetail(@PathVariable(name = "id") Integer id) {
-        return ResponseEntity.ok(scholarshipService.findScholarshipDetail(id));
-    }
-
-    @Getter
-    @Setter
-    public static class ScholarshipSearchCondition { // 유저가 post 요청 보내는 dto
-        private Integer incomeLevel;           // 소득분위
-        private UUID regionId;      // 지역id
-        private UUID universityId;   // 대학교id
-        private ScholarshipType type;   // 장학금 유형
-        private Boolean hasFullTuition; // 등록금 지원 여부
-        private Boolean hasScholarship; // 기존 장학금 수혜 여부
-        private String phoneNumber; // user 입력값, 매칭 로직에는 미포함
-
+    @GetMapping("/{id}")
+    @Operation(summary = "장학금 상세 조회", description = "특정 장학금의 상세 정보를 조회합니다.")
+    public ResponseEntity<ScholarshipDetailResponse> getScholarshipDetail(@PathVariable("id") Long id) {
+        Scholarship scholarship = scholarshipService.findScholarshipDetail(id);
+        return ResponseEntity.ok(new ScholarshipDetailResponse(scholarship));
     }
 }
