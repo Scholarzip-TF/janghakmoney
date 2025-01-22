@@ -1,7 +1,5 @@
 package com.example.janghakmoney.scholarship;
 
-import com.example.janghakmoney.common.Region;
-import com.example.janghakmoney.common.University;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,17 +16,18 @@ public class ScholarshipService {
 
     public List<Scholarship> findPossibleScholarships(
             Integer incomeLevel,
-            Region targetRegion,
-            University university,
+//            Region targetRegion,
+//            University university,
+            UUID regionId,
+            UUID universityId,
             ScholarshipType type,
             Boolean hasFullTuition,
             Boolean hasScholarship
     ) {
-        return scholarshipRepository.findPossibleScholarships(
+return scholarshipRepository.findPossibleScholarships(
+                regionId,
+                universityId,
                 incomeLevel,
-                targetRegion,
-                university,
-                type,
                 hasFullTuition,
                 hasScholarship
         );
