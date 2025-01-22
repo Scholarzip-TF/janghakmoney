@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/scholarships")
@@ -34,7 +33,7 @@ public class ScholarshipController {
     }
 
     @GetMapping("/{id}") // 유저가 선택한 장학금 디테일을 보여줌
-    public ResponseEntity<Scholarship> getScholarshipDetail(@PathVariable(name = "id") UUID id) {
+    public ResponseEntity<Scholarship> getScholarshipDetail(@PathVariable(name = "id") Integer id) {
         return ResponseEntity.ok(scholarshipService.findScholarshipDetail(id));
     }
 

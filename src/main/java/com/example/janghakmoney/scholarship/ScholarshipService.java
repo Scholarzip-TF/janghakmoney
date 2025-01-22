@@ -32,7 +32,7 @@ public class ScholarshipService {
         );
     }
 
-    public Scholarship findScholarshipDetail(UUID scholarshipId) {
+    public Scholarship findScholarshipDetail(Integer scholarshipId) {
         return scholarshipRepository.findById(scholarshipId)
                 .orElseThrow(() -> new EntityNotFoundException("해당 장학금을 찾을 수 없습니다. ID: " + scholarshipId));
     }

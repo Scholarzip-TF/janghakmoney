@@ -15,7 +15,7 @@ import java.util.List;
 public class Scholarship {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     // 정보 6개

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ScholarshipRepository extends JpaRepository<Scholarship, UUID> {
+public interface ScholarshipRepository extends JpaRepository<Scholarship, Integer> {
 
     @Query("SELECT DISTINCT s FROM Scholarship s " +
             "LEFT JOIN s.scholarshipUniversities su " +
