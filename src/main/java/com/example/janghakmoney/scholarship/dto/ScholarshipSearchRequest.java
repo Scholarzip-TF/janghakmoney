@@ -21,9 +21,6 @@ public class ScholarshipSearchRequest {
     private Integer incomeLevel;
 
     @NotNull
-    private ScholarshipType type;
-
-    @NotNull
     private Boolean hasFullTuition; // 등록금 지원 여부
 
     @NotNull
