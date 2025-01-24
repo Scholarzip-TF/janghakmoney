@@ -6,9 +6,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-public interface UniversityRepository extends JpaRepository<University, UUID> {
+public interface UniversityRepository extends JpaRepository<University, Integer> {
     // 대학교명으로 대학교 조회
     Optional<University> findByName(String name);
 

@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,8 +15,8 @@ import java.util.UUID;
 public class University {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    private UUID id; // UUID로 고유 ID 생성
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id; // Auto increment로 고유 ID 생성
 
     @Column(nullable = false, unique = true)
     private String name; // 대학교 이름

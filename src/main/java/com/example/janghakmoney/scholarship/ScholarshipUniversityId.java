@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,5 +13,5 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class ScholarshipUniversityId implements Serializable {
     private Long scholarship;
-    private UUID university;
+    private int university;
 }

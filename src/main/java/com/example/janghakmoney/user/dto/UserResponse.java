@@ -9,8 +9,8 @@ import java.util.UUID;
 @Getter
 public class UserResponse {
     private UUID id;
-    private UUID universityId;      // 장학금 검색에 필요
-    private UUID regionId;          // 장학금 검색에 필요
+    private Integer universityId;      // 장학금 검색에 필요
+    private Integer regionId;          // 장학금 검색에 필요
     private Integer incomeLevel;     // 장학금 검색에 필요
     private Boolean hasFullTuitionScholarship;  // 장학금 검색에 필요
     private Boolean hasLivingExpenseScholarship;
