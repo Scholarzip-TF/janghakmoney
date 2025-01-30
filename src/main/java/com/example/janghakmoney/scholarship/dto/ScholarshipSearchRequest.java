@@ -12,10 +12,10 @@ import java.util.UUID;
 public class ScholarshipSearchRequest {
 
     @NotNull
-    private UUID regionId;
+    private Integer regionId;
 
     @NotNull
-    private UUID universityId;
+    private Integer universityId;
 
     @NotNull
     private Integer incomeLevel;
