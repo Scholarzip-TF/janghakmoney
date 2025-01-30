@@ -12,13 +12,13 @@ import java.util.UUID;
 public class ScholarshipSearchRequest {
 
     @NotNull
-    private Integer regionId;
+    private int regionId;
 
     @NotNull
-    private Integer universityId;
+    private int universityId;
 
     @NotNull
-    private Integer incomeLevel;
+    private int incomeLevel;
 
     @NotNull
     private Boolean hasFullTuition; // 등록금 지원 여부
