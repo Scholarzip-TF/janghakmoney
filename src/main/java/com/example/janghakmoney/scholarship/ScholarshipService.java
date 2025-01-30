@@ -1,13 +1,10 @@
 package com.example.janghakmoney.scholarship;
 
-import com.example.janghakmoney.common.Region;
-import com.example.janghakmoney.common.University;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +15,8 @@ public class ScholarshipService {
 
     public List<Scholarship> findPossibleScholarships(
             Integer incomeLevel,
-            UUID regionId,
-            UUID universityId,
+            Integer regionId,
+            Integer universityId,
             Boolean hasFullTuition,
             Boolean hasScholarship
     ) {
