@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public interface ScholarshipRepository extends JpaRepository<Scholarship, Integer> {
@@ -58,8 +57,8 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Intege
             "OR (s.type = 'LIVING_DUPLICATE') " +
             "OR (s.type = 'LIVING_NO_DUPLICATE' AND :hasScholarship = false))")
     List<Scholarship> findPossibleScholarships(
-            @Param("userRegionId") UUID userRegionId,
-            @Param("userUniversityId") UUID userUniversityId,
+            @Param("userRegionId") Integer userRegionId,
+            @Param("userUniversityId") Integer userUniversityId,
             @Param("userIncomeLevel") Integer userIncomeLevel,
             @Param("hasFullTuition") boolean hasFullTuition,
             @Param("hasScholarship") boolean hasScholarship);
