@@ -11,18 +11,17 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@IdClass(ScholarshipRegionId.class)
 @Table(name = "scholarship_region")
 public class ScholarshipRegion {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scholarship_id", nullable = false)
     private Scholarship scholarship;
 
-    @ManyToOne
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 
