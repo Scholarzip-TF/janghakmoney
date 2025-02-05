@@ -13,5 +13,5 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class ScholarshipRegionId implements Serializable {
     private Long scholarship;
-    private Long region;
+    private int region;
 }
