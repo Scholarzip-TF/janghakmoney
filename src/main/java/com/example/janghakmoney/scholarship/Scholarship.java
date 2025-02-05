@@ -31,7 +31,7 @@ public class Scholarship {
     @Column(nullable = true)
     private LocalDate applicationStartDate; // 모집 시작일
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate applicationEndDate; // 모집 종료일
 
     @Column(nullable = true)
