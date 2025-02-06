@@ -35,7 +35,7 @@ public class Scholarship {
     private LocalDate applicationEndDate; // 모집 종료일
 
     @Lob  // Large Object를 의미하며, MySQL에서는 TEXT로 매핑됨
-    @Column(nullable = true)
+    @Column(nullable = true, columnDefinition = "LONGTEXT")
     private String note; // 비고
 
     // 비교 조건 4개
