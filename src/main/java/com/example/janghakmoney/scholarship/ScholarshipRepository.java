@@ -51,7 +51,7 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Intege
             "OR (r.level = 1 AND p.id = :userRegionId) " +
             "OR (r.level = 2 AND r.id = :userRegionId))) AND " +
             // 소득분위 조건
-            "(:userIncomeLevel IS NULL OR s.incomeLevel <= :userIncomeLevel) AND " +
+            "(:userIncomeLevel IS NULL OR s.incomeLevel >= :userIncomeLevel) AND " +
             // 지원유형 조건
             "((s.type = 'TUITION' AND :hasFullTuition = false) " +
             "OR (s.type = 'LIVING_DUPLICATE') " +
