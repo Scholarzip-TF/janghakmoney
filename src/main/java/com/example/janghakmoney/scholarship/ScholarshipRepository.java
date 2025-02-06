@@ -44,7 +44,7 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Intege
             "LEFT JOIN s.scholarshipRegions sr LEFT JOIN sr.region r LEFT JOIN r.parent p " +
             "WHERE " +
             // 대학 조건
-            "(:userUniversityId IS NULL OR su.university.id = :userUniversityId) AND " +
+            "(:userUniversityId IS NULL OR su.university.id = :userUniversityId OR su.university.id IS NULL) AND " +
             // 지역 조건
             "(:userRegionId IS NULL OR " +
             "(sr.region IS NULL " +
