@@ -16,7 +16,8 @@ public class SecurityConfig {
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)  // 동일 도메인 허용
 //                        .frameOptions(frameOptions -> frameOptions.allowFrom("https://example.com"))  // 특정 도메인 허용
-                );
+                )
+                .csrf(csrf -> csrf.disable());  // CSRF 보호 비활성화
         return http.build();
     }
 }
