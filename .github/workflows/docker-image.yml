@@ -29,14 +29,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: make application.yml
-        run: |
-          if [ ! -d "./src/main/resources" ]; then
-            mkdir -p ./src/main/resources
-          fi
-          echo "${{ secrets.YML }}" > ./src/main/resources/application.yml
-        shell: bash
-
       - name: make application-deploy.properties
         run: |
           if [ ! -d "./src/main/resources" ]; then
@@ -45,23 +37,23 @@ jobs:
           echo "${{ secrets.YML_DEPLOY }}" > ./src/main/resources/application-deploy.properties
         shell: bash
 
-      - name: Build with Gradle
+      - name: (1) Build with Gradle
         run: ./gradlew clean build -x test
 
-      - name: AWS ECR 로그인
+      - name: (2) AWS ECR 로그인
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set region ${{ secrets.AWS_REGION }}
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY }}
 
-      - name: Docker Build & Push to AWS ECR
+      - name: (2) Docker Build & Push to AWS ECR
         run: |
           docker build --platform linux/amd64 -t scholarzip-server .
           docker tag scholarzip-server:latest ${{ secrets.ECR_REPOSITORY }}:latest
           docker push ${{ secrets.ECR_REPOSITORY }}:latest
 
-      - name: Deploy to EC2
+      - name: (4) Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
