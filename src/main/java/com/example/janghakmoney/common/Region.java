@@ -12,7 +12,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Table(name = "Region", uniqueConstraints = @UniqueConstraint(columnNames = {"majorName", "minorName"}))
+@Table(name = "region", uniqueConstraints = @UniqueConstraint(columnNames = {"majorName", "minorName"}))
 public class Region {
 
     @Id

@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "Scholarship")
+@Table(name = "scholarship")
 public class Scholarship {
 
     @Id
