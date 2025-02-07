@@ -54,8 +54,8 @@ jobs:
 
       - name: Docker Build & Push to AWS ECR
         run: |
-          docker build -t ${{ secrets.ECR_REPOSITORY }}:latest .
-          docker tag ${{ secrets.ECR_REPOSITORY }}:latest ${{ secrets.ECR_REPOSITORY }}:latest
+          docker build --platform linux/amd64 -t scholarzip-server .
+          docker tag scholarzip-server:latest ${{ secrets.ECR_REPOSITORY }}:latest
           docker push ${{ secrets.ECR_REPOSITORY }}:latest
 
       - name: Deploy to EC2
