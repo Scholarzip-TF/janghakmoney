@@ -42,8 +42,16 @@ jobs:
           echo "${{ secrets.YML }}" > ./application.yml
         shell: bash
 
+      - name: make application-deploy.properties
+        run: |
+          if [ ! -d "./src/main/resources" ]; then
+            mkdir -p ./src/main/resources
+          fi
+          echo "${{ secrets.YML_DEPLOY }}" > ./src/main/resources/application-deploy.properties
+        shell: bash
+
       - name: Build with Gradle
-        run: ./gradlew build -x test
+        run: ./gradlew clean build -x test
 
       - name: AWS ECR 로그인
         run: |
