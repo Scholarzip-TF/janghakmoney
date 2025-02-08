@@ -47,7 +47,7 @@ jobs:
           aws configure set region ${{ secrets.AWS_REGION }}
           aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY }}
 
-      - name: (2) Docker Build & Push to AWS ECR
+      - name: (3) Docker Build & Push to AWS ECR
         run: |
           docker build --platform linux/amd64 -t scholarzip-server .
           docker tag scholarzip-server:latest ${{ secrets.ECR_REPOSITORY }}:latest
