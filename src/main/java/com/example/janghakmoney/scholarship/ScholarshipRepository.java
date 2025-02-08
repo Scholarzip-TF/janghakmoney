@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,14 +58,16 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Intege
             "OR (s.type = 'LIVING_DUPLICATE') " +
             "OR (s.type = 'LIVING_NO_DUPLICATE' AND :hasScholarship = false)) AND" +
             // 마감일 조건
-            "(s.applicationEndDate >= FUNCTION('DATE_SUB', CURRENT_DATE, INTERVAL 120 DAY))" +
+            "(s.applicationEndDate BETWEEN :minDate AND CURRENT_DATE)" +
             "ORDER BY s.applicationEndDate DESC")
     List<Scholarship> findPossibleScholarships(
             @Param("userRegionId") Integer userRegionId,
             @Param("userUniversityId") Integer userUniversityId,
             @Param("userIncomeLevel") Integer userIncomeLevel,
             @Param("hasFullTuition") boolean hasFullTuition,
-            @Param("hasScholarship") boolean hasScholarship);
+            @Param("hasScholarship") boolean hasScholarship,
+            @Param("minDate") LocalDate minDate);
+
 
     Optional<Scholarship> findById(Long scholarshipId);
 }

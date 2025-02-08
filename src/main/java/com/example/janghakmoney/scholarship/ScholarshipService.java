@@ -4,6 +4,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,12 +22,14 @@ public class ScholarshipService {
             Boolean hasFullTuition,
             Boolean hasScholarship
     ) {
-    return scholarshipRepository.findPossibleScholarships(
+        LocalDate minDate = LocalDate.now().minusDays(120);
+        return scholarshipRepository.findPossibleScholarships(
                     regionId,
                     universityId,
                     incomeLevel,
                     hasFullTuition,
-                    hasScholarship
+                    hasScholarship,
+                    minDate
         );
     }
 
