@@ -30,7 +30,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://scholarzip.kr", "https://scholarzip.kr", "http://www.scholarzip.kr", "https://www.scholarzip.kr", "https://findscholarzip.netlify.app"));  // 필요한 도메인만 명시할 수 있음
+//        configuration.setAllowedOrigins(List.of("http://scholarzip.kr", "https://scholarzip.kr", "http://www.scholarzip.kr", "https://www.scholarzip.kr", "https://findscholarzip.netlify.app"));  // 필요한 도메인만 명시할 수 있음
+        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
