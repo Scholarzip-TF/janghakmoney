@@ -59,8 +59,6 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Intege
             // 마감일 조건
             "(s.applicationEndDate >= CURRENT_DATE - 120)" +
             "ORDER BY s.applicationEndDate DESC")
-
-
     List<Scholarship> findPossibleScholarships(
             @Param("userRegionId") Integer userRegionId,
             @Param("userUniversityId") Integer userUniversityId,
