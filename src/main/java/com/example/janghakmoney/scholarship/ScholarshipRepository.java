@@ -55,9 +55,12 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Intege
             // 지원유형 조건
             "((s.type = 'TUITION' AND :hasFullTuition = false) " +
             "OR (s.type = 'LIVING_DUPLICATE') " +
-            "OR (s.type = 'LIVING_NO_DUPLICATE' AND :hasScholarship = false)) AND " +
+            "OR (s.type = 'LIVING_NO_DUPLICATE' AND :hasScholarship = false)) AND" +
             // 마감일 조건
-            "(s.applicationEndDate >= CURRENT_DATE - INTERVAL '4' MONTH)")
+            "(s.applicationEndDate >= CURRENT_DATE - 120)" +
+            "ORDER BY s.applicationEndDate DESC")
+
+
     List<Scholarship> findPossibleScholarships(
             @Param("userRegionId") Integer userRegionId,
             @Param("userUniversityId") Integer userUniversityId,
