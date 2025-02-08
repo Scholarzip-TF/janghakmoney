@@ -57,7 +57,7 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Intege
             "OR (s.type = 'LIVING_DUPLICATE') " +
             "OR (s.type = 'LIVING_NO_DUPLICATE' AND :hasScholarship = false)) AND" +
             // 마감일 조건
-            "(s.applicationEndDate >= CURRENT_DATE - 120)" +
+            "(s.applicationEndDate >= FUNCTION('DATE_SUB', CURRENT_DATE, INTERVAL 120 DAY))" +
             "ORDER BY s.applicationEndDate DESC")
     List<Scholarship> findPossibleScholarships(
             @Param("userRegionId") Integer userRegionId,
