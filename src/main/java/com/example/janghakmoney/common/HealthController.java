@@ -1,4 +1,4 @@
-package com.example.janghakmoney;
+package com.example.janghakmoney.common;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

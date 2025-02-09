@@ -1,4 +1,4 @@
-package com.example.janghakmoney;
+package com.example.janghakmoney.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
